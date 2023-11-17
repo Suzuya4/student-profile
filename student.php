@@ -1,14 +1,17 @@
 <?php
 include_once("db.php"); // Include the file with the Database class
 
-class Student {
+class Student
+{
     private $db;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->db = $db;
     }
 
-    public function create($data) {
+    public function create($data)
+    {
         try {
             // Prepare the SQL INSERT statement
             $sql = "INSERT INTO students(student_number, first_name, middle_name, last_name, gender, birthday) VALUES(:student_number, :first_name, :middle_name, :last_name, :gender, :birthday);";
@@ -23,15 +26,13 @@ class Student {
             $stmt->bindParam(':birthday', $data['birthday']);
 
             // Execute the INSERT query
-            $stmt->execute();
+            //$stmt->execute();
 
             // Check if the insert was successful
-             
-            if($stmt->rowCount() > 0)
-            {
+
+            if ($stmt->rowCount() > 0) {
                 return $this->db->getConnection()->lastInsertId();
             }
-
         } catch (PDOException $e) {
             // Handle any potential errors here
             echo "Error: " . $e->getMessage();
@@ -39,7 +40,8 @@ class Student {
         }
     }
 
-    public function read($id) {
+    public function read($id)
+    {
         try {
             $connection = $this->db->getConnection();
 
@@ -58,7 +60,8 @@ class Student {
         }
     }
 
-    public function update($id, $data) {
+    public function update($id, $data)
+    {
         try {
             $sql = "UPDATE students SET
                     student_number = :student_number,
@@ -89,7 +92,8 @@ class Student {
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         try {
             $sql = "DELETE FROM students WHERE id = :id";
             $stmt = $this->db->getConnection()->prepare($sql);
@@ -108,7 +112,8 @@ class Student {
         }
     }
 
-    public function displayAll(){
+    public function displayAll()
+    {
         try {
             $sql = "SELECT * FROM students LIMIT 10"; // Modify the table name to match your database
             $stmt = $this->db->getConnection()->prepare($sql);
@@ -121,11 +126,12 @@ class Student {
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
- 
+
     /*
         sample simple tests
     */
-    public function testCreateStudent() {
+    public function testCreateStudent()
+    {
         $data = [
             'student_number' => 'S12345',
             'first_name' => 'John',
@@ -145,7 +151,8 @@ class Student {
         }
     }
 
-    public function testReadStudent($id) {
+    public function testReadStudent($id)
+    {
         $studentData = $this->read($id);
 
         if ($studentData !== false) {
@@ -156,7 +163,8 @@ class Student {
         }
     }
 
-    public function testUpdateStudent($id, $data) {
+    public function testUpdateStudent($id, $data)
+    {
         $success = $this->update($id, $data);
 
         if ($success) {
@@ -166,7 +174,8 @@ class Student {
         }
     }
 
-    public function testDeleteStudent($id) {
+    public function testDeleteStudent($id)
+    {
         $deleted = $this->delete($id);
 
         if ($deleted) {
@@ -200,5 +209,3 @@ $student->testUpdateStudent($student_id, $update_data);
 
 // Test the delete method with the created student ID
 $student->testDeleteStudent($student_id);
-
-?>

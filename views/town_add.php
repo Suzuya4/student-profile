@@ -9,40 +9,42 @@ include_once("../province.php");
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $data = [    
-    'name' => $_POST['name'],
+    $data = [
+        'id' => $_POST['id'],
+        'name' => $_POST['name'],
     ];
+
     // Instantiate the Database and Student classes
     $database = new Database();
-    $student = new TownCity($database);
-    $town_id = $student->create($data);
-    
+    $town = new TownCity($database);
+    $town_id = $town->create($data);
+
     if ($town_id) {
         // Student record successfully created
-        
+
         // Retrieve student details from the form
-        $studentDetailsData = [
+        $towncityDetailsData = [
             'id' => $town_id, // Use the obtained student ID
+            'name' => $_POST['name'],
             // Other student details fields
         ];
 
         // Create student details linked to the student
         $studentDetails = new StudentDetails($database);
-        
+
         if ($studentDetails->create($studentDetailsData)) {
             echo "Record inserted successfully.";
         } else {
             echo "Failed to insert the record.";
         }
     }
-
-    
 }
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,21 +52,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <title>Add Student Data</title>
 </head>
+
 <body>
     <!-- Include the header and navbar -->
     <?php include('../templates/header.html'); ?>
     <?php include('../includes/navbar.php'); ?>
 
     <div class="content">
-    <h1>Add Student Data</h1>
-    <form action="" method="post" class="centered-form">
-        <label for="name">Town Name:</label>
-        <input type="text" name="name" id="name" required>
+        <h1>Add Town/City</h1>
+        <form action="" method="post" class="centered-form">
+            <label for="id">ID:</label>
+            <input type="text" name="id" id="id" required>
 
-        <input type="submit" value="Add Town">
-    </form>
+            <label for="name">Name:</label>
+            <select name="town_city" id="town_city" required>
+                <?php
+
+                $database = new Database();
+                $towns = new TownCity($database);
+                $results = $towns->getAll();
+                // echo print_r($results);
+                foreach ($results as $result) {
+                    echo '<option value="' . $result['id'] . '">' . $result['name'] . '</option>';
+                }
+                ?>
+
+                <input type="submit" value="Add Town/City">
+        </form>
     </div>
-    
+
     <?php include('../templates/footer.html'); ?>
 </body>
+
 </html>
