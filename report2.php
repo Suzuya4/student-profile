@@ -10,8 +10,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL Query to count the top 10 town_citys with the most students
-$queryToptown_citys = "
+// SQL Query to count the top 10 town_city with the most students
+$queryToptown_city = "
     SELECT
         p.name AS town_city,
         COUNT(s.id) AS student_count
@@ -28,18 +28,18 @@ $queryToptown_citys = "
     LIMIT 10;
 ";
 
-$resultToptown_citys = mysqli_query($conn, $queryToptown_citys);
+$resultToptown_city = mysqli_query($conn, $queryToptown_city);
 
-if (mysqli_num_rows($resultToptown_citys) > 0) {
+if (mysqli_num_rows($resultToptown_city) > 0) {
     $town_city_count_data = array();
     $label_chart_data = array();
 
-    while ($row = mysqli_fetch_array($resultToptown_citys)) {
+    while ($row = mysqli_fetch_array($resultToptown_city)) {
         $town_city_count_data[] = $row['student_count'];
         $label_chart_data[] = $row['town_city'];
     }
 
-    mysqli_free_result($resultToptown_citys);
+    mysqli_free_result($resultToptown_city);
     mysqli_close($conn);
 } else {
     echo "No records matching your query were found.";
@@ -63,15 +63,15 @@ if (mysqli_num_rows($resultToptown_citys) > 0) {
             <div class="col-md-6">
                 <div class="card text-center">
                     <div class="header">
-                        <h4 class="title">Top 10 town_citys with Most Students</h4>
+                        <h4 class="title">Top 10 town_cities with Most Students</h4>
                         <p class="category">Student Counts by town_city</p>
                     </div>
                     <div class="content">
-                        <canvas id="myChartToptown_citys"></canvas>
+                        <canvas id="myChartToptown_city"></canvas>
                         <script>
                             const town_city_count_data = <?php echo json_encode($town_city_count_data); ?>;
                             const label_chart_data = <?php echo json_encode($label_chart_data); ?>;
-                            const dataToptown_citys = {
+                            const dataToptown_city = {
                                 labels: label_chart_data,
                                 datasets: [{
                                     label: 'Student Count',
@@ -104,15 +104,15 @@ if (mysqli_num_rows($resultToptown_citys) > 0) {
                                 }]
                             };
 
-                            const configToptown_citys = {
+                            const configToptown_city = {
                                 type: 'bar',
-                                data: dataToptown_citys,
+                                data: dataToptown_city,
                                 options: {
                                     aspectRatio: 2.5,
                                 }
                             };
 
-                            const myChartToptown_citys = new Chart(document.getElementById('myChartToptown_citys'), configToptown_citys);
+                            const myChartToptown_city = new Chart(document.getElementById('myChartToptown_city'), configToptown_city);
                         </script>
                     </div>
                     <hr>
