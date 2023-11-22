@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "newschool_db";
+$dbname = "school_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -37,7 +37,7 @@ if ($conn->connect_error) {
                                 $query = "SELECT
                                     COUNT(students.gender) AS allGender
                                 FROM
-                                    newschool_db.students
+                                    school_db.students
                                 GROUP BY gender";
 
                                 $result = mysqli_query($conn, $query);

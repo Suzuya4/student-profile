@@ -38,28 +38,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
     <title>Edit Town/City</title>
 </head>
+
 <body>
     <!-- Include the header and navbar -->
     <?php include('../templates/header.html'); ?>
     <?php include('../includes/navbar.php'); ?>
 
     <div class="content">
-    <h2>Edit Town/City Information</h2>
-    <form action="" method="post">
-        <input type="hidden" name="id" value="<?php echo $town_id['id']; ?>">
-        
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="<?php echo $town_id['name']; ?>">
-        
-        <input type="submit" value="Update">
-    </form>
+        <h2>Edit Town/City Information</h2>
+        <form action="" method="post">
+            <input type="hidden" name="id" value="<?php echo $town_id['id']; ?>">
+
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="<?php echo $town_id['name']; ?>">
+
+            <input type="submit" value="Update">
+        </form>
     </div>
     <?php include('../templates/footer.html'); ?>
 </body>
+
 </html>

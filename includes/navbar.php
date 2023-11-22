@@ -26,7 +26,7 @@
                     <p>Province</p>
                 </a>
             </li>
-            <!-- <li class="dropdown">
+            <li class="dropdown">
                 <a href="#" class="dropbtn">
                     <i class="fas fa-calendar-week"></i>
                     <p>Reports</p>
@@ -36,7 +36,7 @@
                     <a href="/report2.php">Report 2</a>
                     <a href="/report3.php">Report 3</a>
                 </div>
-            </li> -->
+            </li>
         </ul>
     </div>
 </div>

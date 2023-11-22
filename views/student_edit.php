@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
     $studentdetails = new StudentDetails($db);
     $studentDetails = $studentdetails->read($id); // Implement the read method in the StudentDetails class
 
-    if ($studentData && $studentDetails != null) {
+    if ($studentData && $studentDetails) {
         // The student data is retrieved, and you can pre-fill the edit form with this data.
     } else {
         echo "Student not found.";

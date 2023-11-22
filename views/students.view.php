@@ -11,18 +11,20 @@ $studentDetails  = new StudentDetails($db);
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Records</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
+
 <body>
     <!-- Include the header -->
     <?php include('../templates/header.html'); ?>
     <?php include('../includes/navbar.php'); ?>
 
-    
+
     <div class="content">
         <h2>Student Records</h2>
         <table class="orange-theme">
@@ -61,7 +63,6 @@ $studentDetails  = new StudentDetails($db);
                         <td><?php echo $output['province']; ?></td>
                         <td>
                             <a href="student_edit.php?id=<?php echo $output['student_id']; ?>">Edit</a>
-                            |
                             <a href="student_delete.php?id=<?php echo $output['student_id']; ?>">Delete</a>
                         </td>
                     </tr>
