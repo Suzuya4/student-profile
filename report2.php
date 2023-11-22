@@ -10,15 +10,15 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL Query to count the top 10 provinces with the most students
-$queryTopProvinces = "
+// SQL Query to count the top 10 town_citys with the most students
+$queryToptown_citys = "
     SELECT
-        p.name AS province_name,
+        p.name AS town_city,
         COUNT(s.id) AS student_count
     FROM
-        province p
+        town_city p
     JOIN
-        student_details sd ON p.id = sd.province
+        student_details sd ON p.id = sd.town_city
     JOIN
         students s ON sd.student_id = s.id
     GROUP BY
@@ -28,18 +28,18 @@ $queryTopProvinces = "
     LIMIT 10;
 ";
 
-$resultTopProvinces = mysqli_query($conn, $queryTopProvinces);
+$resultToptown_citys = mysqli_query($conn, $queryToptown_citys);
 
-if (mysqli_num_rows($resultTopProvinces) > 0) {
-    $province_count_data = array();
+if (mysqli_num_rows($resultToptown_citys) > 0) {
+    $town_city_count_data = array();
     $label_chart_data = array();
 
-    while ($row = mysqli_fetch_array($resultTopProvinces)) {
-        $province_count_data[] = $row['student_count'];
-        $label_chart_data[] = $row['province_name'];
+    while ($row = mysqli_fetch_array($resultToptown_citys)) {
+        $town_city_count_data[] = $row['student_count'];
+        $label_chart_data[] = $row['town_city'];
     }
 
-    mysqli_free_result($resultTopProvinces);
+    mysqli_free_result($resultToptown_citys);
     mysqli_close($conn);
 } else {
     echo "No records matching your query were found.";
@@ -63,19 +63,19 @@ if (mysqli_num_rows($resultTopProvinces) > 0) {
             <div class="col-md-6">
                 <div class="card text-center">
                     <div class="header">
-                        <h4 class="title">Top 10 Provinces with Most Students</h4>
-                        <p class="category">Student Counts by Province</p>
+                        <h4 class="title">Top 10 town_citys with Most Students</h4>
+                        <p class="category">Student Counts by town_city</p>
                     </div>
                     <div class="content">
-                        <canvas id="myChartTopProvinces"></canvas>
+                        <canvas id="myChartToptown_citys"></canvas>
                         <script>
-                            const province_count_data = <?php echo json_encode($province_count_data); ?>;
+                            const town_city_count_data = <?php echo json_encode($town_city_count_data); ?>;
                             const label_chart_data = <?php echo json_encode($label_chart_data); ?>;
-                            const dataTopProvinces = {
+                            const dataToptown_citys = {
                                 labels: label_chart_data,
                                 datasets: [{
                                     label: 'Student Count',
-                                    data: province_count_data,
+                                    data: town_city_count_data,
                                     backgroundColor: [
                                         'rgba(255, 69, 96, 0.7)',
                                         'rgba(30, 144, 255, 0.7)',
@@ -104,20 +104,20 @@ if (mysqli_num_rows($resultTopProvinces) > 0) {
                                 }]
                             };
 
-                            const configTopProvinces = {
+                            const configToptown_citys = {
                                 type: 'bar',
-                                data: dataTopProvinces,
+                                data: dataToptown_citys,
                                 options: {
                                     aspectRatio: 2.5,
                                 }
                             };
 
-                            const myChartTopProvinces = new Chart(document.getElementById('myChartTopProvinces'), configTopProvinces);
+                            const myChartToptown_citys = new Chart(document.getElementById('myChartToptown_citys'), configToptown_citys);
                         </script>
                     </div>
                     <hr>
                     <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                        <i class="fa fa-history"></i>
                     </div>
                 </div>
             </div>

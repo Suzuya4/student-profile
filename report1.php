@@ -88,7 +88,7 @@ if ($conn->connect_error) {
                                 </script>
                             <hr>
                             <div class="stats">
-                                <i class="fa fa-history"></i> Updated 3 minutes ago
+                                <i class="fa fa-history"></i>
                             </div>
                         </div>
                     </div>

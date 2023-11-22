@@ -132,7 +132,7 @@ if (mysqli_num_rows($resultBirthMonthDistribution) > 0) {
                     </div>
                     <hr>
                     <div class="stats">
-                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                        <i class="fa fa-history"></i>
                     </div>
                 </div>
             </div>
