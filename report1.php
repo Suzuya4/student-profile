@@ -64,12 +64,12 @@ if ($conn->connect_error) {
                                             label: 'Total Orders',
                                             data: allGender,
                                             backgroundColor: [
-                                                'rgba(255, 0, 0, 0.7)',
-                                                'rgba(0, 128, 255, 0.7)',
+                                                'rgba(54, 162, 235, 0.7)',
+                                                'rgba(255, 99, 132, 0.7)' 
                                             ],
                                             borderColor: [
-                                                'rgba(255, 0, 0, 1)',
-                                                'rgba(0, 128, 255, 1)',
+                                                'rgba(54, 162, 235, 1)',
+                                                'rgba(255, 99, 132, 1)'
                                             ],
                                             hoverOffset: 4,
                                             borderWidth: 1
