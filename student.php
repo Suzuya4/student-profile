@@ -95,18 +95,29 @@ class Student {
             $stmt = $this->db->getConnection()->prepare($sql);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
-
+    
             // Check if any rows were affected (record deleted)
             if ($stmt->rowCount() > 0) {
-                return true; // Record deleted successfully
+                $sql = "DELETE FROM student_details WHERE student_id = :id";
+                $stmt = $this->db->getConnection()->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                
+                // Check if any rows were affected (record deleted)
+                if ($stmt->rowCount() > 0) {
+                    return true; // Record deleted successfully from both tables
+                } else {
+                    return false; // No records were deleted from the studentdetails table (student_id not found)
+                }
             } else {
-                return false; // No records were deleted (student_id not found)
+                return false; // No records were deleted from the students table (id not found)
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             throw $e; // Re-throw the exception for higher-level handling
         }
     }
+    
 
     public function displayAll(){
         try {
