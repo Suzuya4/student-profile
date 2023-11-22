@@ -5,9 +5,6 @@ include_once("../student_details.php"); // Include the Student class file
 include_once("../town_city.php");
 include_once("../province.php");
 
-
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data = [    
     'id' => $_POST['id'],
@@ -16,15 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Instantiate the Database and Student classes
     $database = new Database();
-    $town = new TownCity($database);
-    $town_id = $town->create($data);
+    $province = new Province($database);
+    $province_id = $province->create($data);
     
-    if ($town_id) {
+    if ($province_id) {
         // Student record successfully created
         
         // Retrieve student details from the form
         $towncityDetailsData = [
-            'id' => $town_id, // Use the obtained student ID
+            'id' => $province_id, // Use the obtained student ID
             'name' => $_POST['name'],
             // Other student details fields
         ];
@@ -65,12 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" name="id" id="id" required>
 
         <label for="name">Name:</label>
-        <select name="town_city" id="town_city" required>
+        <select name="province" id="province" required>
         <?php
 
             $database = new Database();
-            $towns = new TownCity($database);
-            $results = $towns->getAll();
+            $province = new Province($database);
+            $results = $province->getAll();
             // echo print_r($results);
             foreach($results as $result)
             {
@@ -78,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         ?>
 
-        <input type="submit" value="Add Town/City">
+        <input type="submit" value="Add Province">
     </form>
     </div>
     

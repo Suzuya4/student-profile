@@ -95,9 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="street">Street:</label>
         <input type="text" id="street" name="street" required>
-
         
-
         <label for="town_city">Town / City:</label>
         <select name="town_city" id="town_city" required>
         <?php

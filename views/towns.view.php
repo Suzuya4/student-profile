@@ -29,10 +29,14 @@ $town = new TownCity($db);
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- You'll need to dynamically generate these rows with data from your database -->
+
+
+
                 <?php
                 $results = $town->getAll();
                 foreach ($results as $result) {
